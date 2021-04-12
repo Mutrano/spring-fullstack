@@ -1,7 +1,9 @@
 package com.mutrano.demo.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="tb_product")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +26,14 @@ public class Product {
 	private Double price;
 
 	@ManyToMany
-	@JoinTable(name="PRODUCT_CATEGORY",
+	@JoinTable(name="tb_PRODUCT_CATEGORY",
 			joinColumns = @JoinColumn(name="product_id"),
 			inverseJoinColumns=@JoinColumn(name="category_id")
 			)
 	private List<Category> categories= new ArrayList<>();
 	
+	@OneToMany(mappedBy="id.product")
+	private Set<OrderItem> items= new HashSet<>();
 	
 	public Product() {
 	}
@@ -38,6 +45,12 @@ public class Product {
 		this.price = price;
 	}
 
+	public List<Order> getOrders(){
+		List<Order> orders = new ArrayList<>();
+		items.stream()
+			.forEach(orderItem -> orders.add(orderItem.getOrder()));
+		return orders;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -60,6 +73,14 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Set<OrderItem> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<OrderItem> items) {
+		this.items = items;
 	}
 
 	@Override
