@@ -1,19 +1,23 @@
 package com.mutrano.demo.dtos;
 
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.mutrano.demo.domain.Category;
-import com.mutrano.demo.domain.Product;
 
 public class CategoryDTO {
 	
 	private Integer id; 
 	
+	@NotEmpty(message="Category name must be not empty")
+	@Length(min=5,max=80, message="The size must be between 5 and 80 characters")
 	private String name;
+	
 	public CategoryDTO() {
 		
 	}
-	public CategoryDTO(Integer id, String name, List<Product> products) {
+	public CategoryDTO(Integer id, String name) {
 		this.id = id;
 		this.name = name;
 	}
