@@ -22,10 +22,10 @@ public class City {
 	@JoinColumn(name="state_id")
 	private State state;
 	
-	public City(Integer id, String name) {
-		super();
+	public City(Integer id, String name, State state) {
 		this.id = id;
 		this.name = name;
+		this.state= state;
 	}
 
 	public Integer getId() {

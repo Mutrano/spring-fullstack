@@ -45,12 +45,11 @@ public class Order {
 	}
 
 
-	public Order(Integer id, Instant instant, Address deliveryAddress, Client client, Payment payment) {
+	public Order(Integer id, Instant instant,  Client client,Address deliveryAddress) {
 		this.id = id;
 		this.instant = instant;
 		this.deliveryAddress = deliveryAddress;
 		this.client = client;
-		this.payment = payment;
 	}
 
 

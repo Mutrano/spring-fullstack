@@ -83,6 +83,14 @@ public class Product {
 		this.items = items;
 	}
 
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

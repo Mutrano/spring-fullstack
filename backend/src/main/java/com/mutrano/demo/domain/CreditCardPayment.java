@@ -15,7 +15,7 @@ public class CreditCardPayment extends Payment{
 		
 	}
 
-	public CreditCardPayment(Integer id, PaymentState paymentState,Integer numberOfParcels,Order order) {
+	public CreditCardPayment(Integer id, PaymentState paymentState,Order order, Integer numberOfParcels) {
 		super(id, paymentState,order);
 		this.setNumberOfParcels(numberOfParcels);
 	}

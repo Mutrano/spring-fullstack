@@ -32,13 +32,15 @@ public class Address {
 	public Address() {
 	}
 	public Address(Integer id, String publicPlace, String number, String complement, String residentialArea,
-			String zipCode) {
+			String zipCode,Client client, City city) {
 		this.id = id;
 		this.publicPlace = publicPlace;
 		this.number = number;
 		this.complement = complement;
 		this.residentialArea = residentialArea;
 		this.zipCode = zipCode;
+		this.city=city;
+		this.client=client;
 	}
 	public Integer getId() {
 		return id;
@@ -75,6 +77,20 @@ public class Address {
 	}
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+	
+	
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	@Override
 	public int hashCode() {
