@@ -1,6 +1,11 @@
 package com.mutrano.demo.services;
 
+import java.util.List;
+
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mutrano.demo.domain.Category;
@@ -52,6 +57,16 @@ public class CategoryService {
 		catch(DataIntegrityViolationException expn) {
 			throw new DataIntegrityException("It's not possible to delete a category with products");
 		}
+	}
+	
+	public List<CategoryDTO> findAll(){
+		List<Category> foundCategories = categoryRepository.findAll();
+		return categoryMapper.toDTO(foundCategories);
+	}
+	public Page<CategoryDTO> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction),orderBy);
+		Page<Category> categoryPage= categoryRepository.findAll(pageRequest);
+		return categoryPage.map(obj -> new CategoryDTO(obj));
 	}
 
 }
